@@ -1,0 +1,7 @@
+.cproject
+.externalToolBuilders/
+.project
+.settings/
+*.d
+*.o
+*.so
