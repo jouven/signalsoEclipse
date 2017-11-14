@@ -37,7 +37,7 @@ namespace signal
 extern int signalNumber_f();
 
 //when the program is exiting how often to check the threadcounter to see if all the other threads have ended
-//used to check the timeout too, can be modified on the fly
+//used to check the timeout too, can be modified on the fly, 250 by default
 extern std::atomic_uint_fast32_t frequencyCheckMilliseconds_ato;
 
 //if it's greater than 0 other threads are still running
@@ -58,7 +58,7 @@ extern void signal_handler_f(int signal_par);
 //with this boolean we can hint the main function that there are no more threads running
 //so it can exit "safely"
 //can be used on a while without choking the cpu (it has a sleep/wait)
-extern bool isTheEnd_f();
+extern bool isTheEnd_f(const uint_fast32_t checkEveryMilliseconds_par_con = frequencyCheckMilliseconds_ato);
 
 //becomes false when a signal is hit,
 //this one will choke the cpu if looped with no sleep or operation happening in between

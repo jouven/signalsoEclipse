@@ -29,7 +29,7 @@ std::atomic_bool isRunning_ato(true);
 //when the program is exiting how often to check the threadcounter
 //to see if all the other threads have ended
 //used to check the timeout too
-std::atomic_uint_fast32_t frequencyCheckMilliseconds_ato(500);
+std::atomic_uint_fast32_t frequencyCheckMilliseconds_ato(250);
 //if it's greater than 0 other threads are still running
 std::atomic_uint_fast32_t threadCounter_ato(0);
 uint_fast32_t threadCount_f()
@@ -47,10 +47,13 @@ uint_fast32_t timeOutMilliseconds_f()
 //with this boolean we can hint the main function that there are no more threads running
 //so it can exit "safely"
 std::atomic_bool isTheEnd_ato(false);
-bool isTheEnd_f()
+bool isTheEnd_f(const uint_fast32_t checkEveryMilliseconds_par_con)
 {
-	std::this_thread::sleep_for(std::chrono::milliseconds(
-		                                frequencyCheckMilliseconds_ato));
+	if (not isTheEnd_ato)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(
+			checkEveryMilliseconds_par_con));
+	}
 	return isTheEnd_ato;
 }
 
