@@ -2,7 +2,9 @@
 #include "signal.hpp"
 
 #ifdef DEBUGJOUVEN
+#ifndef __ANDROID__
 #include "backwardSTso/backward.hpp"
+#endif
 #include "comuso/loggingMacros.hpp"
 #include <iostream>
 #include <cstring>
